@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="TextFileAnalyzer:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/TextFileAnalyzer_jar</output-path>
+    <root id="archive" name="TextFileAnalyzer.jar">
+      <element id="module-output" name="TextFileAnalyzer" />
+    </root>
+  </artifact>
+</component>

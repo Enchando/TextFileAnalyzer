@@ -115,8 +115,58 @@ public static void analyzeFile(File textFile) {
         return endString;
     }
 
+    /**
+     * Function for checking file is a .txt. Using similar method to Files.getExtension.
+     * @param input Input file string to check if it is a .txt.
+     * @return True if ends with .txt, false if not.
+     */
+    public static boolean checkFile(String input){
+        //Check to see if file exists
+        if(input == null){
+            return false;
+        }
+        File file = new File(input);
+        //Check if it is a .txt file
+        String fileString = new File(input).getName();
+        int dotIndex = fileString.lastIndexOf('.');
+        if(!((dotIndex == -1) ? "" : fileString.substring(dotIndex + 1)).equals("txt")){
+            return false;
+        }
+        //Check there is content in file
+        return file.length() != 0;
+
+    }
+
+    /**
+     * Function for checking user input is correct.
+     * @return The string to be used as a file.
+     */
+    public static String userInput(){
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Please enter the name of the .txt file to be analysed.");
+        boolean txtFile = false;
+        String input = "";
+
+        //Continually asking for file name until a valid one is given.
+        while(!txtFile){
+            input = scanner.nextLine();
+            if(checkFile(input)){
+                txtFile = true;
+                System.out.println("Correct type of file");
+            }else{
+                System.out.println("Incorrect format of file or file does not exist, please try again.");
+            }
+        }
+
+        return input;
+    }
+
     public static void main(String[] args) {
-        File testFile = new File("src/main/resources/TestText.txt");
-        analyzeFile(testFile);
+        //src/main/resources/TestText.txt
+        while(true) {
+            String input = userInput();
+            File testFile = new File(input);
+            analyzeFile(testFile);
+        }
     }
 }
