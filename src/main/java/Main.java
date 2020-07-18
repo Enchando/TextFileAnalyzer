@@ -5,13 +5,14 @@ import java.util.Collections;
 import java.util.Scanner;
 import java.util.TreeMap;
 
-public class Main {    /**
+public class Main {
+    /**
  * Finds the word count in the file and the average word length. Ignores punctuation before/after words, but
  * keeps them in if they are part of the word or number. This is done for simplicity; for example words such as
  * 'didn't' will be of length 6 but '"Hello!"' will be of length 5. Punctuation outside the string does not contribute
  * towards the word's length, as they are not intrinsic to the word, whereas mathematical operators, apostrophes etc. form
  * a part of the word.
- * @param textFile
+ * @param textFile The text file to analyze.
  */
 public static void analyzeFile(File textFile) {
 
@@ -82,9 +83,12 @@ public static void analyzeFile(File textFile) {
         */
         if (word.length() == 1) {
             return 1;
-
-        } else {
+        }else if(!notEmptyWord(word)) {
+            return 0;
+        }
+        else {
             //Taking the current word and removing any unnecessary punctuation from the front and back while still retaining punctuation inside the word.
+
             while (!(Character.isLetterOrDigit(word.charAt(0)) && Character.isLetterOrDigit(word.charAt(word.length() - 1)))) {
                 if (!(Character.isLetterOrDigit(word.charAt(0)))) {
                     word = word.substring(1);
@@ -96,6 +100,23 @@ public static void analyzeFile(File textFile) {
 
             return word.length();
         }
+    }
+
+    /**
+     * Function for checking if a word contains any letters or digits at all.
+     * @param word Word to be checked
+     * @return True if the word contains a letter or digit, false otherwise.
+     */
+    public static boolean notEmptyWord(String word){
+        boolean containsLetterOrDigit = false;
+        char[] chars = word.toCharArray();
+        for(char c : chars){
+            if(Character.isLetterOrDigit(c)){
+                containsLetterOrDigit = true;
+                break;
+            }
+        }
+        return containsLetterOrDigit;
     }
 
     /**
@@ -162,7 +183,6 @@ public static void analyzeFile(File textFile) {
     }
 
     public static void main(String[] args) {
-        //src/main/resources/TestText.txt
         while(true) {
             String input = userInput();
             File testFile = new File(input);

@@ -1,7 +1,6 @@
 import org.junit.jupiter.api.*;
 
 import java.io.ByteArrayInputStream;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -39,6 +38,19 @@ class MainTest {
         assertEquals(19, testSize);
 
         System.out.println("wordCondenser test completed, moving on.");
+    }
+
+    @Test
+    void notEmptyWord(){
+        //Test to see if word that has letters and digits returns true.
+        boolean testValidity = Main.notEmptyWord("////e$$");
+        assertTrue(testValidity);
+
+        //Test to see if word made of no digits or letters passes.
+        testValidity = Main.notEmptyWord("><><>?>?>{}{@~@_+_+-=--");
+        assertFalse(testValidity);
+
+        System.out.println("notEmptyWord test completed, moving on.");
     }
 
     @Test
